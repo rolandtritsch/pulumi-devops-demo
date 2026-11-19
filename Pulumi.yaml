@@ -1,0 +1,8 @@
+name: devops-demo
+description: Minimal ECR and ECS Fargate deployment for the observable Fibonacci worker
+runtime:
+  name: python
+  options:
+    toolchain: uv
+    virtualenv: .venv
+main: __main__.py

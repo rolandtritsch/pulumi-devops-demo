@@ -1,0 +1,4 @@
+config:
+  aws:profile: roland
+  aws:region: eu-west-1
+  devops-demo:imageDigest: sha256:c8bedab999e6cb5104a4ad68c396cf5b759b97319c87c47c4397ee2de199188f
