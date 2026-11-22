@@ -66,11 +66,15 @@ def wait_for_service(aws: list[str], outputs: dict, timeout: float) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--profile", default="roland")
+    parser.add_argument(
+        "--profile", help="optional local profile; omit for ECS role credentials"
+    )
     parser.add_argument("--wait-seconds", type=float, default=180)
     args = parser.parse_args()
     outputs = query(["pulumi", "stack", "output", "--stack", "devops-demo", "--json"])
-    aws = ["aws", "--profile", args.profile, "--region", outputs["region"]]
+    aws = ["aws", "--region", outputs["region"]]
+    if args.profile:
+        aws.extend(["--profile", args.profile])
     wait_for_service(aws, outputs, args.wait_seconds)
     arns = query(
         aws
